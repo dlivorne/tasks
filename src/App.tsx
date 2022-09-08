@@ -31,8 +31,8 @@ function App(): JSX.Element {
                         First Column.
                         <div
                             style={{
-                                width: "6px",
-                                height: "8px",
+                                width: "10px",
+                                height: "14px",
                                 backgroundColor: "red"
                             }}
                         ></div>
@@ -41,8 +41,8 @@ function App(): JSX.Element {
                         Second column. Adding words.
                         <div
                             style={{
-                                width: "6px",
-                                height: "8px",
+                                width: "10px",
+                                height: "14px",
                                 backgroundColor: "red"
                             }}
                         ></div>
