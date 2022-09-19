@@ -26,8 +26,7 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    let crr2: number[];
-    crr2 = numbers.map((x) => +x || 0);
+    const crr2 = numbers.map((x) => +x || 0);
     return crr2;
 }
 
@@ -39,8 +38,7 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    let temp: number[];
-    temp = amounts.map((x) =>
+    const temp = amounts.map((x) =>
         x.substring(0, 1) == "$" ? +x.substring(1) || 0 : +x || 0
     );
     return temp;
@@ -52,18 +50,15 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    let temp_e: String[];
-    temp_e = messages
+    const temp_e = messages
         .filter((x) => x.substring(x.length - 1) === "!")
         .map((x) => x.toUpperCase());
-    let temp_n: String[];
-    temp_n = messages.filter(
+    const temp_n = messages.filter(
         (x) =>
             x.substring(x.length - 1) !== "?" &&
             x.substring(x.length - 1) !== "!"
     );
-    let temp_f: String[];
-    temp_f = [...temp_n, ...temp_e];
+    const temp_f = [...temp_n, ...temp_e];
     return temp_f;
 };
 
@@ -72,8 +67,7 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    let temp: number[];
-    temp = words.map((x) => (x.length < 4 ? 1 : 0));
+    const temp = words.map((x) => (x.length < 4 ? 1 : 0));
     console.log(temp);
     const arrSum3 = (x) => x.reduce((a, b) => a + b, 0);
     return arrSum3(temp);
@@ -85,10 +79,8 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    let check: string[];
-    check = ["red", "blue", "green"];
-    let flags: string[];
-    flags = colors.map((x) => check.indexOf(x) < 0);
+    const check = ["red", "blue", "green"];
+    const flags = colors.map((x) => check.indexOf(x) < 0);
     return !flags.includes(true);
 }
 
@@ -102,8 +94,7 @@ export function allRGB(colors: string[]): boolean {
 export function makeMath(addends: number[]): string {
     const arrSum = (addends) => addends.reduce((a, b) => a + b, 0);
     const tot = arrSum(addends);
-    let arrstr: string[];
-    arrstr = addends.map((x) => x.toString());
+    const arrstr = addends.map((x) => x.toString());
     let BigString: string;
     BigString = tot.toString() + "=" + arrstr.join("+");
     BigString =
