@@ -5,6 +5,42 @@
 Browserslist: caniuse-lite is outdated. Please run:
   npx browserslist@latest --update-db
   Why you should do it regularly: https://github.com/browserslist/browserslist#browsers-data-updating
+PASS src/arrays.test.ts
+  ● Console
+
+    console.log
+      [ 1, 1, 1, 1, 1 ]
+
+      at countShortWords (src/arrays.ts:71:13)
+
+    console.log
+      [
+        1, 1, 0, 0,
+        0, 1, 0
+      ]
+
+      at countShortWords (src/arrays.ts:71:13)
+
+    console.log
+      [ 0, 0, 0 ]
+
+      at countShortWords (src/arrays.ts:71:13)
+
+    console.log
+      [ 0, 0, 0 ]
+
+      at countShortWords (src/arrays.ts:71:13)
+
+    console.log
+      []
+
+      at countShortWords (src/arrays.ts:71:13)
+
+    console.log
+      [ 1, 1, 1, 1 ]
+
+      at countShortWords (src/arrays.ts:71:13)
+
 PASS src/HtmlCss.test.tsx
 PASS src/functions.test.ts
 PASS src/text.test.tsx
@@ -12,13 +48,14 @@ PASS src/App.test.tsx
 --------------|---------|----------|---------|---------|-------------------
 File          | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
 --------------|---------|----------|---------|---------|-------------------
-All files     |      88 |    87.09 |     100 |      88 |                   
+All files     |   96.29 |    91.83 |     100 |   95.45 |                   
  App.tsx      |     100 |      100 |     100 |     100 |                   
+ arrays.ts    |     100 |      100 |     100 |     100 |                   
  functions.ts |   86.95 |    87.09 |     100 |   86.95 | 22,24,26          
 --------------|---------|----------|---------|---------|-------------------
 
-Test Suites: 4 passed, 4 total
-Tests:       14 passed, 14 total
+Test Suites: 5 passed, 5 total
+Tests:       23 passed, 23 total
 Snapshots:   0 total
-Time:        3.915 s
+Time:        5.164 s
 Ran all test suites.
