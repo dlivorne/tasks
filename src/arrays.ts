@@ -113,12 +113,10 @@ export function makeMath(addends: number[]): string {
  */
 export function injectPositive(values: number[]): number[] {
     const neg1 = values.findIndex((x) => x < 0);
-    const arrSum = (arrnum) => arrnum.reduce((a, b) => a + b, 0);
+    const arrSum = (x) => x.reduce((a, b) => a + b, 0);
     const tot3 = arrSum(values.filter((x) => values.indexOf(x) < neg1));
-    let arrpre: number[];
-    arrpre = values.filter((x) => values.indexOf(x) <= neg1);
-    let arrpost: number[];
-    arrpost = values.filter((x) => values.indexOf(x) > neg1);
+    const arrpre = values.filter((x) => values.indexOf(x) <= neg1);
+    const arrpost = values.filter((x) => values.indexOf(x) > neg1);
     let arrfinal: number[];
     if (neg1 >= 0) {
         arrfinal = [...arrpre, tot3, ...arrpost];
