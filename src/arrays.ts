@@ -69,7 +69,7 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
 export function countShortWords(words: string[]): number {
     const temp = words.map((x) => (x.length < 4 ? 1 : 0));
     console.log(temp);
-    const arrSum3 = (x) => x.reduce((a, b) => a + b, 0);
+    const arrSum3 = (x: any[]) => x.reduce((a, b) => a + b, 0);
     return arrSum3(temp);
 }
 
@@ -92,7 +92,7 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    const arrSum = (addends) => addends.reduce((a, b) => a + b, 0);
+    const arrSum = (addends: any[]) => addends.reduce((a, b) => a + b, 0);
     const tot = arrSum(addends);
     const arrstr = addends.map((x) => x.toString());
     let BigString: string;
@@ -113,7 +113,7 @@ export function makeMath(addends: number[]): string {
  */
 export function injectPositive(values: number[]): number[] {
     const neg1 = values.findIndex((x) => x < 0);
-    const arrSum = (x) => x.reduce((a, b) => a + b, 0);
+    const arrSum = (x: any[]) => x.reduce((a, b) => a + b, 0);
     const tot3 = arrSum(values.filter((x) => values.indexOf(x) < neg1));
     const arrpre = values.filter((x) => values.indexOf(x) <= neg1);
     const arrpost = values.filter((x) => values.indexOf(x) > neg1);
