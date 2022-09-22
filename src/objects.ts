@@ -32,8 +32,8 @@ export function makeBlankQuestion(
  * HINT: Look up the `trim` and `toLowerCase` functions.
  */
 export function isCorrect(question: Question, answer: string): boolean {
-    const qtrim = question.expected.toLowerCase;
-    const atrim = answer.toLowerCase;
+    const qtrim = question.expected.trim().toLowerCase();
+    const atrim = answer.trim().toLowerCase();
     if (qtrim === atrim) {
         return true;
     } else {
@@ -48,16 +48,14 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
-    if (question.type == "short_answer_question") {
-        return true;
-    } else if (question.type == "multiple_choice_question") {
-        if (answer in question.options) {
+    if (question.type == "multiple_choice_question") {
+        if (question.options.includes(answer)) {
             return true;
         } else {
             return false;
         }
     }
-    return false;
+    return true;
 }
 
 /**
@@ -90,7 +88,7 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
-    return "# " + question.name\n question.body\n;
+    return "";
 }
 
 /**
@@ -98,7 +96,6 @@ export function toMarkdown(question: Question): string {
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    question.name = newName;
     return question;
 }
 
@@ -108,13 +105,13 @@ export function renameQuestion(question: Question, newName: string): Question {
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
-    const pub = question.published;
-    if (pub == true) {
-        question.published = false;
-    } else if (pub == false) {
-        question.published = true;
+    const q2 = question;
+    if (q2.published == true) {
+        q2.published = false;
+    } else {
+        q2.published = true;
     }
-    return question;
+    return q2;
 }
 
 /**
