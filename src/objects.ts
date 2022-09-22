@@ -48,8 +48,9 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
-    if (question.type == "multiple_choice_question") {
-        if (question.options.includes(answer)) {
+    const temp2 = { ...question };
+    if (temp2.type == "multiple_choice_question") {
+        if (temp2.options.includes(answer)) {
             return true;
         } else {
             return false;
@@ -65,8 +66,9 @@ export function isValid(question: Question, answer: string): boolean {
  * name "My First Question" would become "9: My First Q".
  */
 export function toShortForm(question: Question): string {
-    const id2 = question.id;
-    const name2 = question.name.substring(0, 10);
+    const temp3 = { ...question };
+    const id2 = temp3.id;
+    const name2 = temp3.name.substring(0, 10);
     return id2 + ": " + name2;
 }
 
@@ -96,7 +98,9 @@ export function toMarkdown(question: Question): string {
  * `newName`.
  */
 export function renameQuestion(question: Question, newName: string): Question {
-    return question;
+    const temp = { ...question };
+    temp.name = newName;
+    return temp;
 }
 
 /**
@@ -105,7 +109,7 @@ export function renameQuestion(question: Question, newName: string): Question {
  * published; if it was published, now it should be not published.
  */
 export function publishQuestion(question: Question): Question {
-    const q2 = question;
+    const q2 = { ...question };
     if (q2.published == true) {
         q2.published = false;
     } else {
@@ -121,11 +125,10 @@ export function publishQuestion(question: Question): Question {
  * The `published` field should be reset to false.
  */
 export function duplicateQuestion(id: number, oldQuestion: Question): Question {
-    oldQuestion.id = id;
-    const name3 = oldQuestion.name;
-    oldQuestion.name = "Copy of " + name3;
-    oldQuestion.published = false;
-    return oldQuestion;
+    const temp4 = { ...oldQuestion };
+    temp4.name = "Copy of " + oldQuestion.name;
+    temp4.published = false;
+    return temp4;
 }
 
 /**
