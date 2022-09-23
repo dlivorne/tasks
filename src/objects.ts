@@ -5,6 +5,7 @@ import { Question, QuestionType } from "./interfaces/question";
  * `expected` should be empty strings, the `options` should be an empty list, the `points`
  * should default to 1, and `published` should default to false.
  */
+/*
 export function makeBlankQuestion(
     id: number,
     name: string,
