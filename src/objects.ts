@@ -1,5 +1,3 @@
-import { queries } from "@testing-library/react";
-import { isQuestion } from "./functions";
 import { Question, QuestionType } from "./interfaces/question";
 
 /**
