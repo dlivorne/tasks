@@ -13,9 +13,9 @@ export function makeBlankQuestion(
     type: QuestionType
 ): Question {
     return {
-        id,
-        name,
-        type,
+        id: id,
+        name: name,
+        type: type,
         body: "",
         expected: "",
         options: [],
