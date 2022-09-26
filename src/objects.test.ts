@@ -50,25 +50,13 @@ describe("Testing the object functions", () => {
 
     test("Testing the makeBlankQuestion function", () => {
         expect(
-            makeBlankQuestion({
-                id: 1,
-                name: "Question 1",
-                type: "multiple_choice_question"
-            })
+            makeBlankQuestion(1, "Question 1", "multiple_choice_question")
         ).toEqual(BLANK_QUESTIONS[0]);
         expect(
-            makeBlankQuestion({
-                id: 47,
-                name: "My New Question",
-                type: "multiple_choice_question"
-            })
+            makeBlankQuestion(47, "My New Question", "multiple_choice_question")
         ).toEqual(BLANK_QUESTIONS[1]);
         expect(
-            makeBlankQuestion({
-                id: 2,
-                name: "Question 2",
-                type: "short_answer_question"
-            })
+            makeBlankQuestion(2, "Question 2", "short_answer_question")
         ).toEqual(BLANK_QUESTIONS[2]);
     });
 
