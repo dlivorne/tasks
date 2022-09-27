@@ -1,12 +1,16 @@
+import { NotEmittedStatement } from "typescript";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
+import { makeBlankQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
  * that are `published`.
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
-    return [];
+    let pubQuestion = [...questions];
+    pubQuestion = pubQuestion.filter((x) => x.published == true);
+    return pubQuestion;
 }
 
 /**
@@ -15,7 +19,12 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    return [];
+    let nempty = [...questions];
+    nempty = nempty
+        .filter((x) => x.body != "")
+        .filter((x) => x.expected != "")
+        .filter((x) => x.options != []);
+    return nempty;
 }
 
 /***
@@ -26,7 +35,12 @@ export function findQuestion(
     questions: Question[],
     id: number
 ): Question | null {
-    return null;
+    const idques = questions.find((element) => element.id == id);
+    if (idques == undefined) {
+        return null;
+    } else {
+        return idques;
+    }
 }
 
 /**
@@ -34,7 +48,9 @@ export function findQuestion(
  * with the given `id`.
  */
 export function removeQuestion(questions: Question[], id: number): Question[] {
-    return [];
+    let rquestion = [...questions];
+    rquestion = rquestion.filter((x) => x.id != id);
+    return rquestion;
 }
 
 /***
@@ -42,21 +58,34 @@ export function removeQuestion(questions: Question[], id: number): Question[] {
  * questions, as an array.
  */
 export function getNames(questions: Question[]): string[] {
-    return [];
+    const nquestions = [...questions];
+    const realquestions = nquestions.map((x: Question): string => x.name);
+    return realquestions;
 }
 
 /***
  * Consumes an array of questions and returns the sum total of all their points added together.
  */
 export function sumPoints(questions: Question[]): number {
-    return 0;
+    const point = [...questions];
+    const pquestion = point.reduce(
+        (sum: number, x: Question) => sum + x.points,
+        0
+    );
+    return pquestion;
 }
 
 /***
  * Consumes an array of questions and returns the sum total of the PUBLISHED questions.
  */
 export function sumPublishedPoints(questions: Question[]): number {
-    return 0;
+    let pubQuestion2 = [...questions];
+    pubQuestion2 = pubQuestion2.filter((x) => x.published == true);
+    const pquestion2 = pubQuestion2.reduce(
+        (sum: number, x: Question) => sum + x.points,
+        0
+    );
+    return pquestion2;
 }
 
 /***
@@ -94,7 +123,10 @@ export function makeAnswers(questions: Question[]): Answer[] {
  * each question is now published, regardless of its previous published status.
  */
 export function publishAll(questions: Question[]): Question[] {
-    return [];
+    const pques = questions.map(
+        (x: Question): Question => ({ ...x, published: true })
+    );
+    return pques;
 }
 
 /***
@@ -129,7 +161,12 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    return [];
+    const idques2 = questions.find((element) => element.id == targetId);
+    if (idques2 != undefined) {
+        return [...questions, (idques2.name = newName)];
+    } else {
+        return [];
+    }
 }
 
 /***
