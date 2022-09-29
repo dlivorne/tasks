@@ -2,7 +2,7 @@ import { NotEmittedStatement } from "typescript";
 import { urlToHttpOptions } from "url";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
-import { makeBlankQuestion } from "./objects";
+import { duplicateQuestion, makeBlankQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -241,5 +241,13 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    return [];
+    const newar = [...questions];
+    const qindex: number = questions.findIndex(
+        (x: Question): boolean => x.id === targetId
+    );
+    return newar.splice(
+        qindex + 1,
+        0,
+        duplicateQuestion(newId, questions[qindex])
+    );
 }
