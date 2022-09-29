@@ -1,4 +1,5 @@
 import { NotEmittedStatement } from "typescript";
+import { urlToHttpOptions } from "url";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
 import { makeBlankQuestion } from "./objects";
@@ -19,11 +20,10 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    let nempty = [...questions];
-    nempty = nempty
-        .filter((x) => x.body != "")
-        .filter((x) => x.expected != "")
-        .filter((x) => x.options != []);
+    const nquestions = [...questions];
+    const nempty = nquestions.filter(
+        (x) => x.body !== "" || x.expected !== "" || x.options.length !== 0
+    );
     return nempty;
 }
 
@@ -134,7 +134,12 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
-    return false;
+    const narr = questions.filter((x) => x.type == questions[0].type);
+    if (narr.length == questions.length) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 /***
@@ -148,7 +153,8 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    return [];
+    const newquestion = [...questions, { makeBlankQuestion }];
+    return newquestion(id, name, type);
 }
 
 /***
@@ -161,12 +167,13 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    const idques2 = questions.find((element) => element.id == targetId);
-    if (idques2 != undefined) {
-        return [...questions, (idques2.name = newName)];
-    } else {
-        return [];
-    }
+    const newArr = questions.map((x) => {
+        if (x.id === targetId) {
+            return { ...x, name: newName };
+        }
+        return x;
+    });
+    return newArr;
 }
 
 /***
@@ -181,7 +188,18 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType
 ): Question[] {
-    return [];
+    const newArr2 = questions.map((x) => {
+        if (x.id === targetId) {
+            if (x.type === "multiple_choice_question") {
+                if (newQuestionType !== "multiple_choice_question") {
+                    x.options = [];
+                }
+            }
+            x.type = newQuestionType;
+        }
+        return x;
+    });
+    return newArr2;
 }
 
 /**
@@ -200,7 +218,16 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    const newArr3 = questions.map((x) => {
+        if (x.id === targetId) {
+            if (targetOptionIndex === -1) {
+                return [x.options, { newOption }];
+            } else {
+                return x.options.splice(targetOptionIndex, 1, newOption);
+            }
+        }
+    });
+    return newArr3;
 }
 
 /***
