@@ -205,12 +205,11 @@ export function changeQuestionTypeById(
 ): Question[] {
     const newArr2 = questions.map((x) => {
         if (x.id === targetId) {
-            if (x.type === "multiple_choice_question") {
-                if (newQuestionType !== "multiple_choice_question") {
-                    x.options = [];
-                }
+            if (newQuestionType !== "multiple_choice_question") {
+                return { ...x, type: newQuestionType, options: [] };
+            } else {
+                return { ...x, type: newQuestionType };
             }
-            x.type = newQuestionType;
         }
         return x;
     });
@@ -256,13 +255,10 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    const newar = [...questions];
-    const qindex: number = questions.findIndex(
+    const temp = [...questions];
+    const qindex: number = temp.findIndex(
         (x: Question): boolean => x.id === targetId
     );
-    return newar.splice(
-        qindex + 1,
-        0,
-        duplicateQuestion(newId, questions[qindex])
-    );
+    temp.splice(qindex + 1, 0, duplicateQuestion(newId, questions[qindex]));
+    return temp;
 }
