@@ -1,5 +1,3 @@
-import { NotEmittedStatement } from "typescript";
-import { urlToHttpOptions } from "url";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
 import { duplicateQuestion, makeBlankQuestion } from "./objects";
@@ -21,10 +19,10 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
     const nquestions = [...questions];
-    const nempty = nquestions.filter(
+    const nempty2 = nquestions.filter(
         (x) => x.body !== "" || x.expected !== "" || x.options.length !== 0
     );
-    return nempty;
+    return nempty2;
 }
 
 /***
