@@ -138,7 +138,8 @@ export function makeAnswers(questions: Question[]): Answer[] {
  * each question is now published, regardless of its previous published status.
  */
 export function publishAll(questions: Question[]): Question[] {
-    const pques = questions.map(
+    let pques = [...questions];
+    pques = questions.map(
         (x: Question): Question => ({ ...x, published: true })
     );
     return pques;
@@ -149,7 +150,8 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
-    const narr = questions.filter((x) => x.type == questions[0].type);
+    let narr = [...questions];
+    narr = questions.filter((x) => x.type == questions[0].type);
     if (narr.length == questions.length) {
         return true;
     } else {
@@ -168,7 +170,8 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    const newquestion = [...questions, makeBlankQuestion(id, name, type)];
+    let newquestion = [...questions];
+    newquestion = [...questions, makeBlankQuestion(id, name, type)];
     return newquestion;
 }
 
@@ -182,7 +185,8 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    const newArr = questions.map((x) => {
+    let newArr = [...questions];
+    newArr = questions.map((x) => {
         if (x.id === targetId) {
             return { ...x, name: newName };
         }
@@ -203,7 +207,8 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType
 ): Question[] {
-    const newArr2 = questions.map((x) => {
+    let newArr2 = [...questions];
+    newArr2 = questions.map((x) => {
         if (x.id === targetId) {
             if (newQuestionType !== "multiple_choice_question") {
                 return { ...x, type: newQuestionType, options: [] };
@@ -226,22 +231,33 @@ export function changeQuestionTypeById(
  * Remember, if a function starts getting too complicated, think about how a helper function
  * can make it simpler! Break down complicated tasks into little pieces.
  */
+
 export function editOption(
     questions: Question[],
     targetId: number,
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    const newArr3 = questions.map((x) => {
-        if (x.id === targetId) {
-            if (targetOptionIndex === -1) {
-                return [x.options, { newOption }];
-            } else {
-                return x.options.splice(targetOptionIndex, 1, newOption);
+    let temp2 = [...questions];
+    if (targetOptionIndex === -1) {
+        temp2 = temp2.map((x: Question): Question => {
+            if (x.id === targetId) {
+                x = { ...x, options: [...x.options, newOption] };
             }
-        }
-    });
-    return newArr3;
+            return x;
+        });
+    } else {
+        let temp3: Question;
+        temp2 = temp2.map((x: Question): Question => {
+            if (x.id === targetId) {
+                temp3 = { ...x, options: [...x.options] };
+                temp3.options.splice(targetOptionIndex, 1, newOption);
+                return temp3;
+            }
+            return x;
+        });
+    }
+    return temp2;
 }
 
 /***
@@ -250,6 +266,7 @@ export function editOption(
  * the duplicate inserted directly after the original question. Use the `duplicateQuestion`
  * function you defined previously; the `newId` is the parameter to use for the duplicate's ID.
  */
+
 export function duplicateQuestionInArray(
     questions: Question[],
     targetId: number,
