@@ -34,11 +34,11 @@ export function TwoDice(): JSX.Element {
         <div>
             <div>
                 <Button onClick={rollLeft}>Roll Left</Button>
-                <span> left- die: {left} </span>
+                <span> left-die: {left} </span>
             </div>
             <div>
                 <Button onClick={rollRight}>Roll Right</Button>
-                <span> right die: {right} </span>
+                <span> right-die: {right} </span>
             </div>
             if({winlose(left, right)}){<span> Win </span>}
             else{<span> Lose </span>}
