@@ -1,36 +1,54 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 
+export function nHoliday1(str1: string) {
+    if (str1 === "🎉") {
+        return "❤️";
+    } else if (str1 === "❤️") {
+        return "🐰";
+    } else if (str1 === "🐰") {
+        return "🎃";
+    } else if (str1 === "🎃") {
+        return "🎄";
+    } else {
+        return "🎉";
+    }
+}
+export function nHoliday2(str2: string) {
+    if (str2 === "🎄") {
+        return "🐰";
+    } else if (str2 === "🐰") {
+        return "🎃";
+    } else if (str2 === "🎃") {
+        return "🎉";
+    } else if (str2 === "🎉") {
+        return "❤️";
+    } else {
+        return "🎄";
+    }
+}
+
 export function CycleHoliday(): JSX.Element {
-    /*
-    const [holiday1, setHoliday1] = useState<string>("New Years Day");
-    function nHoliday1(): void {
-        setHoliday1(
-            holiday1 === "New Years Day"
-                ? "Valentines Day"
-                : "Valentines Day"
-                ? "Easter"
-                : "Easter"
-                ? "Halloween"
-                : "Halloween"
-                ? "Christmas"
-                : "New Years Day"
-        );
+    const [holiday1, setHoliday1] = useState<string>("🎉");
+    /*const [holiday2, setHoliday2] = useState<string>("🎄");*/
+
+    function sHoliday1(): void {
+        setHoliday1(nHoliday1(holiday1));
     }
-    const [holiday2, setHoliday2] = useState<string>("Christmas");
-    function nHoliday2(): void {
-        setHoliday2(
-            holiday2 === "Christmas"
-                ? "Easter"
-                : "Easter"
-                ? "Halloween"
-                : "Halloween"
-                ? "New Years Day"
-                : "New Years Day"
-                ? "Valentines Day"
-                : "Christmas"
-        );
+
+    function sHoliday2(): void {
+        setHoliday1(nHoliday2(holiday1));
     }
-*/
-    return <div>Cycle Holiday</div>;
+
+    return (
+        <div>
+            Holiday: {holiday1}
+            <div>
+                <Button onClick={sHoliday1}>Advance by Year</Button>
+            </div>
+            <div>
+                <Button onClick={sHoliday2}>Advance by Alphabet</Button>
+            </div>
+        </div>
+    );
 }

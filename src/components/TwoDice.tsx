@@ -20,7 +20,7 @@ export function TwoDice(): JSX.Element {
         } else if (num1 === num2) {
             return "Win";
         } else {
-            return "Lose";
+            return "";
         }
     }
     function rollLeft(): void {
@@ -34,11 +34,11 @@ export function TwoDice(): JSX.Element {
         <div>
             <div>
                 <Button onClick={rollLeft}>Roll Left</Button>
-                <span> left-die {left} </span>
+                <span data-testid="left-die"> {left} </span>
             </div>
             <div>
                 <Button onClick={rollRight}>Roll Right</Button>
-                <span> right-die {right} </span>
+                <span data-testid="right-die"> {right} </span>
             </div>
             {winlose(left, right)}
         </div>
