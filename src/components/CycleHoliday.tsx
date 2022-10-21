@@ -30,7 +30,6 @@ export function nHoliday2(str2: string) {
 
 export function CycleHoliday(): JSX.Element {
     const [holiday1, setHoliday1] = useState<string>("🎉");
-    /*const [holiday2, setHoliday2] = useState<string>("🎄");*/
 
     function sHoliday1(): void {
         setHoliday1(nHoliday1(holiday1));
